@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учет обслуживания автомобилей</title>
+    <link rel="stylesheet" href="/static/css/styles.css"> <!-- Подключаем CSS -->
+</head>
+
+<body>
+    <h1>Добавить запись обслуживания</h1>
+    <form action="/add" method="post">
+        <label>Модель автомобиля:</label>
+        <input type="text" name="model" required>
+
+        <label>Год выпуска:</label>
+        <input type="number" name="year" required>
+
+        <label>VIN-номер:</label>
+        <input type="text" name="vin" required>
+
+        <label>Дата обслуживания (YYYY-MM-DD):</label>
+        <input type="text" name="date" required>
+
+        <label>Описание обслуживания:</label>
+        <input type="text" name="description" required>
+
+        <label>Стоимость обслуживания:</label>
+        <input type="number" step="0.01" name="cost" required>
+
+        <button type="submit">Добавить</button>
+    </form>
+    <br>
+    <h1>История обслуживания автомобилей</h1>
+
+    {{ if .cars }}
+    <ul>
+        {{ range .cars }}
+        <li>
+            <strong>Модель:</strong> {{ .Model }}, <strong>Год:</strong> {{ .Year }}, <strong>VIN:</strong> {{ .VIN }}
+            <ul>
+                {{ range .Records }}
+                <li>
+                    Дата: {{ .Date }}, Описание: {{ .Description }}, Стоимость: {{ .Cost }}
+                </li>
+                {{ end }}
+            </ul>
+        </li>
+        {{ end }}
+    </ul>
+    {{ else }}
+    <p>Нет записей обслуживания.</p>
+    {{ end }}
+
+    {{ if .error }}
+    <p style="color: red;">{{ .error }}</p>
+    {{ end }}
+</body>
+
+</html>
+
+
