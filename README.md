@@ -35,7 +35,7 @@
 
 3. Переходите в каталог вашего проекта (если он уже создан):
 
-   cd /path/to/your/project
+   cd /path/to/user/project
 
 4. Установите необходимые зависимости Go:
 
@@ -57,7 +57,7 @@
 
    Откройте командную строку (cmd) и перейдите в папку с проектом:
 
-   cd C:\path\to\your\project
+   cd C:\path\to\user\project
 
 4. Установите необходимые зависимости Go:
 
@@ -69,7 +69,7 @@
 
 1. Клонируйте репозиторий на свой компьютер:
 
-   git clone https://github.com/your-username/your-repository.git
+   git clone https://github.com/grudwald/college-product.git
    cd your-repository
 
    Замените your-username и your-repository на свои данные.
