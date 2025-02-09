@@ -43,6 +43,8 @@
 
    go mod tidy
 
+<br>
+
 ### Windows
 
 1. Установите Go. Скачайте [установщик Go для Windows](https://golang.org/dl/) и следуйте инструкциям.
