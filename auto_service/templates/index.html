@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учет обслуживания автомобилей</title>
+    <link rel="stylesheet" href="/static/css/styles.css"> <!-- Подключаем основной CSS -->
+    <link rel="stylesheet" href="/static/css/modal.css"> <!-- Подключаем стили для модальных окон -->
+</head>
+
+<body>
+    <h1>Добавить запись обслуживания</h1>
+    <form action="/add" method="post">
+        <label>Модель автомобиля:</label>
+        <input type="text" name="model" required>
+
+        <label>Год выпуска:</label>
+        <input type="number" name="year" required>
+
+        <label>VIN-номер:</label>
+        <input type="text" name="vin" required>
+
+        <label>Дата обслуживания (YYYY-MM-DD):</label>
+        <input type="text" name="date" required>
+
+        <label>Описание обслуживания:</label>
+        <input type="text" name="description" required>
+
+        <label>Стоимость обслуживания:</label>
+        <input type="number" step="0.01" name="cost" required>
+
+        <button type="submit" class="btn">Добавить</button>
+    </form>
+    <br>
+    <h1>История обслуживания автомобилей</h1>
+
+    {{ if .cars }}
+    <ul>
+        {{ range .cars }}
+        <li>
+            <strong>Модель:</strong> {{ .Model }}, <strong>Год:</strong> {{ .Year }}, <strong>VIN:</strong> {{ .VIN }}
+            <ul>
+                {{ range .Records }}
+                <li>
+                    Дата: {{ .Date }}, Описание: {{ .Description }}, Стоимость: {{ .Cost }}
+                    <button class="btn" onclick="openEditModal({{ .ID }}, '{{ .Date }}', '{{ .Description }}', {{ .Cost }})">Редактировать</button>
+                    <button class="btn" onclick="openDeleteConfirmModal({{ .ID }})">Удалить</button>
+                </li>
+                {{ end }}
+            </ul>
+        </li>
+        {{ end }}
+    </ul>
+    {{ else }}
+    <p>Нет записей обслуживания.</p>
+    {{ end }}
+
+    {{ if .error }}
+    <p style="color: red;">{{ .error }}</p>
+    {{ end }}
+
+    <!-- Модальное окно для редактирования -->
+    <div class="modal" id="editModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Редактировать запись</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm" method="POST" action="/edit">
+                        <input type="hidden" id="recordId" name="record_id">
+                        <div class="form-group">
+                            <label for="editDate">Дата:</label>
+                            <input type="text" class="form-control" id="editDate" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editDescription">Описание:</label>
+                            <input type="text" class="form-control" id="editDescription" name="description" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="editCost">Стоимость:</label>
+                            <input type="number" class="form-control" id="editCost" name="cost" step="0.01" required>
+                        </div>
+                        <button type="submit" class="btn">Сохранить изменения</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Модальное окно подтверждения удаления -->
+<div class="modal" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Подтверждение удаления</h5>
+            </div>
+            <div class="modal-body">
+                <p>Вы уверены, что хотите удалить запись об обслуживании?</p>
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="POST" action="/delete" style="display: inline;">
+                    <input type="hidden" id="deleteRecordId" name="record_id"> <!-- Записываем ID для удаления -->
+                    <button type="submit" class="btn">Удалить</button>
+                </form>
+                <button type="button" class="btn" onclick="closeDeleteConfirmModal()">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="/static/js/script.js"></script> <!-- Подключаем JavaScript файл -->
+</body>
+</html>
+

@@ -1,0 +1,58 @@
+/* modal.css */
+.modal {
+    display: none; /* Скрыть по умолчанию */
+    position: fixed; /* Остается на месте */
+    z-index: 1050; /* Поверх всех элементов */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ширина 100% */
+    height: 100%; /* Высота 100% */
+    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон для затемнения */
+}
+
+.modal-dialog {
+    display: flex;
+    justify-content: center; /* Центрируем диалоговое окно по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+    height: 100%; /* 100% высоты для вертикального центрирования */
+}
+
+.modal-content {
+    width: 400px; /* Фиксированная ширина модального окна */
+    border-radius: 10px; /* Скругляем углы */
+    background-color: white; /* Белый фон для модального окна */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); /* Тень над модальным окном */
+    text-align: center; /* Центрируем текст внутри окна */
+    padding: 20px; /* Отступы внутри окна */
+}
+
+.modal-header {
+    border: none; /* Убрать границу заголовка модального окна */
+    margin-bottom: 20px; /* Отступ между заголовком и телом */
+}
+
+.modal-body {
+    margin-bottom: 20px; /* Отступ от текста до кнопок */
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between; /* Распределяем кнопки по краям */
+}
+
+.btn {
+    padding: 10px 20px; /* Добавляем отступы на кнопки */
+    border-radius: 5px; /* Скругляем кнопки */
+    border: none; /* Убираем рамку */
+    cursor: pointer; /* Указываем, что это кнопка */
+    background-color: #5CB85C; /* Цвет фона всех кнопок */
+    color: #FFFFFF; /* Цвет текста на кнопках */
+    flex: 1; /* Кнопки займут равную ширину */
+    margin: 0 5px; /* Отступы между кнопками */
+    transition: background-color 0.3s ease; /* Плавный переход цвета фона */
+}
+
+.btn:hover {
+    background-color: #4cae4c; /* Затемнение фона при наведении */
+}
+
